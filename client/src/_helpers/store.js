@@ -4,7 +4,6 @@ import { createLogger } from 'redux-logger';
 import { table } from '../table/reducers';
 
 const loggerMiddleware = createLogger();
-
 const rootReducer = combineReducers({
 	table
 });
