@@ -1,14 +1,27 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
+import styled,  { css } from 'styled-components';
 import { tableActions } from '../table/actions';
 import { connect } from 'react-redux';
 import { store } from '../_helpers/store';
 
+const StyledTable = styled.div`
+    border-spacing: 0;
+    border-collapse: collapse;
+`;
+
 const Row = styled.div`
-    margin: 1em;
-    span {
-        margin: 0.25em;
-    }
+    ${props => (props.type === 'header') && css`
+        color: blue;
+    `}
+
+    display: flex;
+    flex-direction: row;
+`;
+
+const TableCell = styled.span`
+    border: 1px solid black;
+    padding: 0.25em;
+    min-width: 100px;
 `;
 
 const Table = (props) => {
@@ -19,16 +32,26 @@ const Table = (props) => {
     }, []); // don't put 'data' here without an "exit condition"--infinite recall loop.
 
     return (
-        <div>
+        <StyledTable>
+            <Row key={'header'} type={'header'}>
+                <TableCell>Id</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Status</TableCell>
+                <TableCell>Date Created</TableCell>
+                <TableCell>Actions</TableCell>
+            </Row>
             {(data && data.length !== 0) ? data.map(item => {
                 return (
                     <Row key={item.id}>
-                        <span>id: {item.id}</span>
-                        <span>{item.name}</span>
+                        <TableCell>{item.id}</TableCell>
+                        <TableCell>{item.name}</TableCell>
+                        <TableCell>Active</TableCell>
+                        <TableCell>02 / 15 / 2020</TableCell>
+                        <TableCell>+ | x | E </TableCell>
                     </Row>
                 );
             }) : 'No items to display.'}
-        </div>
+        </StyledTable>
     );
 }
 

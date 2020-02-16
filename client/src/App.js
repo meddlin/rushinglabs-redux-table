@@ -1,11 +1,23 @@
 import React from 'react';
 import { Table } from './components/Table';
+import styled from 'styled-components';
+
+const CenteredApp = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+`;
 
 const App = () => {
   return (
-    <div className="App">
+    <CenteredApp className="App">
       <Table />
-    </div>
+
+      <button>Create New</button>
+    </CenteredApp>
   );
 }
 
