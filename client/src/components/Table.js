@@ -3,6 +3,7 @@ import styled,  { css } from 'styled-components';
 import { tableActions } from '../table/actions';
 import { connect } from 'react-redux';
 import { store } from '../_helpers/store';
+import { useHistory } from 'react-router-dom';
 
 const StyledTable = styled.div`
     border-spacing: 0;
@@ -26,32 +27,37 @@ const TableCell = styled.span`
 
 const Table = (props) => {
     const { data } = props;
+    let history = useHistory();
 
     useEffect(() => {
         store.dispatch(tableActions.getInitialTable());
     }, []); // don't put 'data' here without an "exit condition"--infinite recall loop.
 
     return (
-        <StyledTable>
-            <Row key={'header'} type={'header'}>
-                <TableCell>Id</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell>Date Created</TableCell>
-                <TableCell>Actions</TableCell>
-            </Row>
-            {(data && data.length !== 0) ? data.map(item => {
-                return (
-                    <Row key={item.id}>
-                        <TableCell>{item.id}</TableCell>
-                        <TableCell>{item.name}</TableCell>
-                        <TableCell>Active</TableCell>
-                        <TableCell>02 / 15 / 2020</TableCell>
-                        <TableCell>+ | x | E </TableCell>
-                    </Row>
-                );
-            }) : 'No items to display.'}
-        </StyledTable>
+        <div>
+            <StyledTable>
+                <Row key={'header'} type={'header'}>
+                    <TableCell>Id</TableCell>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell>Date Created</TableCell>
+                    <TableCell>Actions</TableCell>
+                </Row>
+                {(data && data.length !== 0) ? data.map(item => {
+                    return (
+                        <Row key={item.id}>
+                            <TableCell>{item.id}</TableCell>
+                            <TableCell>{item.name}</TableCell>
+                            <TableCell>Active</TableCell>
+                            <TableCell>02 / 15 / 2020</TableCell>
+                            <TableCell>+ | x | E </TableCell>
+                        </Row>
+                    );
+                }) : 'No items to display.'}
+            </StyledTable>
+
+            <button onClick={() => history.push("/create-user")}>Create New</button>
+        </div>
     );
 }
 
