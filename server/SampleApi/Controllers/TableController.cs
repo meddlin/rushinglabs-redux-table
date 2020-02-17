@@ -17,8 +17,10 @@ namespace SampleApi.Controllers
     {
         private static readonly List<UserProfile> Profiles = new List<UserProfile>
         {
-            new UserProfile{ Id = 1, Name = "John" },
-            new UserProfile{ Id = 2, Name = "Jane" }
+            new UserProfile{ Id = 1, Name = "Alice" },
+            new UserProfile{ Id = 2, Name = "Bob" },
+            new UserProfile{ Id = 2, Name = "Candice", Active = true, DateCreated = DateTime.Now },
+            new UserProfile{ Id = 2, Name = "Dave", Active = true, DateCreated = DateTime.Now }
         };
 
         private readonly ILogger<TableController> _logger;
