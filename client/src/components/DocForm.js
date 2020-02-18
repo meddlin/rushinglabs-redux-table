@@ -42,6 +42,28 @@ const DocForm = (props) => {
                     value={values.name}
                 />
                 {(touched.name && errors.name) ? <div>{errors.name}</div> : ""}
+
+                <label>Active</label>
+                <input 
+                    type="checkbox"
+                    name="active"
+                    label="Active"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.active}
+                />
+                {(touched.active && errors.active) ? <div>{errors.active}</div> : ""}
+
+                <label>Date Created/Hired</label>
+                <input 
+                    type="date"
+                    name="dateCreated"
+                    label="Date Created"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.dateCreated}
+                />
+                {(touched.dateCreated && errors.dateCreated) ? <div>{errors.dateCreated}</div> : ""}
             </Form>
 
             <button type="submit">Create</button>
